@@ -11,12 +11,52 @@
             <!--<Setter Property="Background" Value="Tomato"/>-->
         </Style>
 
-        <Style TargetType="Button" x:Key="Category">
-            <Setter Property="Background" Value="black"/>
+        <Style TargetType="Button" x:Key="Menu">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Foreground" Value="#969696"/>
+            <Setter Property="Margin" Value="8"/>
         </Style>
-
+        
         <Style TargetType="Button" x:Key="Product">
 
+        </Style>
+        
+        <Style TargetType="Button" x:Key="Category">
+            <Setter Property="Background" Value="#222329"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="8"
+                                Background="{TemplateBinding Background}">
+                            <!--<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>-->
+                            <StackPanel>
+                                <!--<Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>-->
+                                <TextBlock 
+                                    Foreground="White" 
+                                    TextAlignment="Center" 
+                                    Height="100"
+                                    Padding="20"
+                                    Text="{TemplateBinding Tag}"
+                                    FontSize="30"
+                                    Margin="10"/>
+                                <Image Source="Resources/Samsung.jpg" Height="220"/>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#e8d100"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Margin" Value="8"/>
         </Style>
     </Window.Resources>
     
@@ -25,7 +65,7 @@
         <ScrollViewer>
             <Grid>
                 <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="80"/>
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="500"/>
                 <RowDefinition Height="320"/>
@@ -43,21 +83,37 @@
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="200"/>
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="160"/>
+                            <ColumnDefinition Width="130"/>
+                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="90"/>
+                            <ColumnDefinition Width="170"/>
                         </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Source="Resources/Logo.png" Margin="8, 0, 0, 0"/>
+                        <ComboBox Grid.Column="1" Background="White"/>
+                        <Button 
+                            Grid.Column="2" 
+                            Content="Заказать звонок" 
+                            x:Name="buttonRequestACall" 
+                            Style="{StaticResource Menu}"
+                            Foreground="#4d70e3"/>
+                        <Button Grid.Column="3" Content="Кредит" x:Name="buttonCredit" Style="{StaticResource Menu}"/>
+                        <Button Grid.Column="4" Content="Сервисный центр" x:Name="buttonServiseCentr" Style="{StaticResource Menu}"/>
+                        <Button Grid.Column="5" Content="Акции" x:Name="buttonActions" Style="{StaticResource Menu}"/>
+                        <Button Grid.Column="6" Content="Блог" x:Name="buttonBlog" Style="{StaticResource Menu}"/>
+                        <Button Grid.Column="7" Content="Контакты" x:Name="buttonContacts" Style="{StaticResource Menu}"/>
+                        <Button Grid.Column="8" Content="Расширеная гарантия" x:Name="buttonGaranaty" Style="{StaticResource Menu}"/>
                     </Grid>
                     <!-- User Grid -->
                     <Grid Grid.Column="2">
@@ -67,6 +123,19 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0" x:Name="buttonSearch" Style="{StaticResource Menu}">
+                            <Image Source="Resources/Search.png"/>
+                        </Button>
+                        <Button Grid.Column="1" x:Name="buttonSignIn" Style="{StaticResource Menu}">
+                            <Image Source="Resources/Sign.png"/>
+                        </Button>
+                        <Button Grid.Column="2" x:Name="buttonComparison" Style="{StaticResource Menu}">
+                            <Image Source="Resources/Comparison.png"/>
+                        </Button>
+                        <Button Grid.Column="3" x:Name="buttonBasket" Style="{StaticResource Menu}">
+                            <Image Source="Resources/Basket.png"/>
+                        </Button>
                     </Grid>
 
                 </Grid>
@@ -92,6 +161,11 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" Style="{StaticResource Category}" x:Name="buttonIphone" Tag="IPhone 13 Pro"/>
+                    <Button Grid.Column="1" Style="{StaticResource Category}" x:Name="buttonMac" Tag="MacBook Pro M1"/>
+                    <Button Grid.Column="2" Style="{StaticResource Category}" x:Name="buttonUsed" Tag="Used IPhone"/>
+                    <Button Grid.Column="3" Style="{StaticResource Category}" x:Name="buttonWatch" Tag="Apple Watch"/>
                 </Grid>
 
                 <!-- Newest buttons Grid -->
@@ -128,6 +202,11 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" Style="{StaticResource Category}" x:Name="buttonTv" Tag="TV 4K"/>
+                    <Button Grid.Column="1" Style="{StaticResource Category}" x:Name="buttonXiaomi" Tag="Xiaomi"/>
+                    <Button Grid.Column="2" Style="{StaticResource Category}" x:Name="buttonSamsung" Tag="Samsung"/>
+                    <Button Grid.Column="3" Style="{StaticResource Category}" x:Name="buttonAudio" Tag="Acustic"/>
                 </Grid>
 
                 <!-- Popular buttons Grid -->
