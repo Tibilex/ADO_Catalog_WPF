@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ADO_Catalog_WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1900" Width="1348">
+        Title="MainWindow" Height="3900" Width="1348"
+    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Window.Resources>
         <ControlTemplate TargetType="Button" x:Key="BaseTemplate">
             <Border
@@ -27,7 +28,7 @@
                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
             </Border>
         </ControlTemplate>
-        
+
         <ControlTemplate TargetType="Button" x:Key="RightBorder">
             <Border CornerRadius="0, 15, 15, 0" Background="{TemplateBinding Background}">
                 <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -43,7 +44,7 @@
             <Setter Property="FontFamily" Value="Gadugi"/>
             <Style.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="30 30 30 30" />
+                    <Setter Property="CornerRadius" Value="25 25 25 25" />
                 </Style>
             </Style.Resources>
             <Style.Triggers>
@@ -63,7 +64,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
+
         <Style TargetType="Button" x:Key="Menu">
             <Setter Property="Background" Value="White"/>
             <Setter Property="BorderBrush" Value="White"/>
@@ -95,7 +96,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <Style TargetType="Button" x:Key="Category">
             <Setter Property="Background" Value="#222329"/>
             <Setter Property="Margin" Value="8"/>
@@ -178,7 +179,7 @@
                                 </Grid>
                             </Grid>
                         </Border>
-                        
+
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -197,32 +198,73 @@
             </Style.Triggers>
         </Style>
 
+        <Style TargetType="Button" x:Key="PhonesButton">
+            <Setter Property="Background" Value="#1b1b1b"/>
+            <Setter Property="BorderBrush" Value="#1b1b1b"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Gadugi"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="18 0 0 0"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="#e8d100"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Button" x:Key="InfoButton">
+            <Setter Property="Background" Value="#1b1b1b"/>
+            <Setter Property="BorderBrush" Value="#1b1b1b"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Gadugi"/>
+            <Setter Property="FontWeight" Value="Light"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="18 0 0 0"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="#e8d100"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
         <Style TargetType="Label" x:Key="BlockName">
             <Setter Property="FontSize" Value="44"/>
             <Setter Property="FontFamily" Value="Gadigi"/>
             <Setter Property="FontWeight" Value="Medium"/>
             <Setter Property="Margin" Value="8 20"/>
         </Style>
-        
+
+        <Style TargetType="TextBlock" x:Key="AdressInfo">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="FontFamily" Value="Gadugi"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Light"/>
+            <Setter Property="Margin" Value="15 0 0 0"/>
+        </Style>
+                     
     </Window.Resources>
-      
+
     <!-- Main Grid -->
     <Grid>
         <ScrollViewer>
             <Grid>
                 <Grid.RowDefinitions>
-                <RowDefinition Height="80"/>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="500"/>
-                <RowDefinition Height="320"/>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="550"/>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="550"/>
-                <RowDefinition Height="320"/>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="550"/>
-                <RowDefinition Height="500"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="500"/>
+                    <RowDefinition Height="320"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="550"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="550"/>
+                    <RowDefinition Height="320"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="550"/>
+                    <RowDefinition Height="500"/>
                 </Grid.RowDefinitions>
 
                 <!-- Menu Grid -->
@@ -247,7 +289,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Image Grid.Column="0" Source="Resources/Logo.png" Margin="8, 0, 0, 0" />
-                        <ComboBox Grid.Column="1" Background="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                        <ComboBox Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                             <ComboBoxItem IsSelected="True">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock>0 800 210 186</TextBlock>
@@ -298,7 +340,7 @@
                     </Grid>
 
                 </Grid>
-        
+
                 <!-- Catalog Grid -->
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -374,15 +416,15 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    
-                <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
-                <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource Product}" Tag="Смартфон Xiaomi Mi 11 Pro 8/256GB (Purple) CN w/Global ROM"/>
-                <Button Grid.Column="2" Grid.Row="0" Style="{StaticResource Product}" Tag="Apple iPhone 8 Plus 256GB (Space Gray) Б/У"/>
-                <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
-                <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
-                <Button Grid.Column="2" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
+
+                    <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
+                    <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource Product}" Tag="Смартфон Xiaomi Mi 11 Pro 8/256GB (Purple) CN w/Global ROM"/>
+                    <Button Grid.Column="2" Grid.Row="0" Style="{StaticResource Product}" Tag="Apple iPhone 8 Plus 256GB (Space Gray) Б/У"/>
+                    <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
+                    <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
+                    <Button Grid.Column="2" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
                 </Grid>
-                
+
                 <!-- Electronic buttons Grid -->
                 <Grid Grid.Row="8">
                     <Grid.ColumnDefinitions>
@@ -409,23 +451,81 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    
-                <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
-                <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource Product}" Tag="Смартфон Xiaomi Mi 11 Pro 8/256GB (Purple) CN w/Global ROM"/>
-                <Button Grid.Column="2" Grid.Row="0" Style="{StaticResource Product}" Tag="Apple iPhone 8 Plus 256GB (Space Gray) Б/У"/>
-                <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
-                <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
-                <Button Grid.Column="2" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
+
+                    <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
+                    <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource Product}" Tag="Смартфон Xiaomi Mi 11 Pro 8/256GB (Purple) CN w/Global ROM"/>
+                    <Button Grid.Column="2" Grid.Row="0" Style="{StaticResource Product}" Tag="Apple iPhone 8 Plus 256GB (Space Gray) Б/У"/>
+                    <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
+                    <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
+                    <Button Grid.Column="2" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
                 </Grid>
-                
+
                 <!-- Info Grid -->
-                <Grid Grid.Row="11" Background="Black">
+                <Grid Grid.Row="11" Background="#1b1b1b">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="333*"/>
+                        <ColumnDefinition Width="333*"/>
+                        <ColumnDefinition Width="287*"/>
+                        <ColumnDefinition Width="379*"/>
                     </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,332,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="90"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Image Source="Resources/LogoBlack.png" HorizontalAlignment="Left"/>
+                        <Button Grid.Row="1" Style="{StaticResource PhonesButton}" Template="{StaticResource BaseTemplate}" Content="0 800 210 186"/>
+                        <Button Grid.Row="2" Style="{StaticResource PhonesButton}" Template="{StaticResource BaseTemplate}" Content="044 333-63-52"/>
+                        <Button Grid.Row="3" Style="{StaticResource PhonesButton}" Template="{StaticResource BaseTemplate}" Content="(066) 731-32-71"/>
+                        <Button Grid.Row="4" Style="{StaticResource PhonesButton}" Template="{StaticResource BaseTemplate}" Content="(067) 153-05-08"/>
+                        <Button Grid.Row="5" Style="{StaticResource PhonesButton}" Template="{StaticResource BaseTemplate}" Content="(063) 233 49 50"/>
+                        <Button Grid.Row="7" Style="{StaticResource PhonesButton}" Template="{StaticResource BaseTemplate}" Content="Обратный звонок"/>
+                    </Grid>
+
+                    <Grid Grid.Column="1" Margin="0,0,8,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Foreground="White" Content="Покупателю" FontSize="18" FontFamily="Gadugi" FontWeight="Bold" VerticalContentAlignment="Center" Padding="18"/>
+                        <Button Grid.Row="1" Style="{StaticResource InfoButton}" Template="{StaticResource BaseTemplate}" Content="Услуги и сервисы"/>
+                        <Button Grid.Row="2" Style="{StaticResource InfoButton}" Template="{StaticResource BaseTemplate}" Content="Карта сайта"/>
+                        <Button Grid.Row="3" Style="{StaticResource InfoButton}" Template="{StaticResource BaseTemplate}" Content="Пользовательское соглашение"/>
+                        <Button Grid.Row="4" Style="{StaticResource InfoButton}" Template="{StaticResource BaseTemplate}" Content="Гарантия и Возврат товара"/>
+                        <Button Grid.Row="5" Style="{StaticResource InfoButton}" Template="{StaticResource BaseTemplate}" Content="Доставка и оплата"/>
+                    </Grid>
+
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Foreground="White" Content="Ждем Вас" FontSize="18" FontFamily="Gadugi" FontWeight="Bold" VerticalContentAlignment="Center" Padding="18"/>
+                        <TextBlock Grid.Row="1" Style="{StaticResource AdressInfo}" Text="г. Днепр ТРК «Апполо 2» магазин «Yellow» ул.Титова, 36"/>
+                        <TextBlock Grid.Row="2" Style="{StaticResource AdressInfo}" Text="г. Днепр ТЦ «Neo Plaza» ул. Марии Кюри 5,"/>
+                        <TextBlock Grid.Row="3" Style="{StaticResource AdressInfo}" Text="г. Днепр проспект Д. Яворницкого, 34"/>
+                        <TextBlock Grid.Row="4" Style="{StaticResource AdressInfo}" Text="г. Киев ул.Жилянская 146, 1 этаж, Шоу-рум «Yellow» (м.Вокзальная)"/>
+                    </Grid>
                 </Grid>
             </Grid>
         </ScrollViewer>
