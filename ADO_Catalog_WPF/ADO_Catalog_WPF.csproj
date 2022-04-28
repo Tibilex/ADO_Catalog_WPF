@@ -108,5 +108,8 @@
     <Resource Include="Resources\Sign.png" />
     <Resource Include="Resources\Comparison.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\LogoBlack.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
