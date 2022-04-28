@@ -5,38 +5,106 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ADO_Catalog_WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="900" Width="1348">
+        Title="MainWindow" Height="1900" Width="1348">
     <Window.Resources>
-        <Style TargetType="Grid">
-            <!--<Setter Property="Background" Value="Tomato"/>-->
+        <ControlTemplate TargetType="Button" x:Key="BaseTemplate">
+            <Border
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                Background="{TemplateBinding Background}"
+                Height="{TemplateBinding Height}"
+                Width="{TemplateBinding Width}" >
+                <ContentControl Margin="{TemplateBinding Padding}"
+                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                        Content="{TemplateBinding Content}" />
+            </Border>
+        </ControlTemplate>
+
+        <ControlTemplate TargetType="Button" x:Key="LeftBorder">
+            <Border CornerRadius="15, 0, 0, 15" Background="{TemplateBinding Background}">
+                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+        </ControlTemplate>
+        
+        <ControlTemplate TargetType="Button" x:Key="RightBorder">
+            <Border CornerRadius="0, 15, 15, 0" Background="{TemplateBinding Background}">
+                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+        </ControlTemplate>
+
+        <Style TargetType="Button" x:Key="RoundedButton">
+            <Setter Property="Background" Value="#e8d100"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Gadugi"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="30 30 30 30" />
+                </Style>
+            </Style.Resources>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#e62949"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
+        <Style TargetType="Button" x:Key="ProductNameButton">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="#794dff"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
         <Style TargetType="Button" x:Key="Menu">
             <Setter Property="Background" Value="White"/>
             <Setter Property="BorderBrush" Value="White"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Foreground" Value="#969696"/>
             <Setter Property="Margin" Value="8"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
-        
-        <Style TargetType="Button" x:Key="Product">
 
+        <Style TargetType="Button" x:Key="ProductMenu">
+            <Setter Property="Background" Value="#ededf0"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="Margin" Value="0, 10"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Foreground" Value="#2c2c2e"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border 
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
         
         <Style TargetType="Button" x:Key="Category">
             <Setter Property="Background" Value="#222329"/>
+            <Setter Property="Margin" Value="8"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border CornerRadius="8"
                                 Background="{TemplateBinding Background}">
-                            <!--<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>-->
                             <StackPanel>
-                                <!--<Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>-->
                                 <TextBlock 
                                     Foreground="White" 
                                     TextAlignment="Center" 
@@ -56,10 +124,88 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Margin" Value="8"/>
         </Style>
+
+        <Style TargetType="Button" x:Key="Product">
+            <Setter Property="Margin" Value="8"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="8" Background="{TemplateBinding Background}" BorderBrush="#acacb0" BorderThickness="1">
+                            <Grid Margin="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="180"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Column="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="120"/>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Button Grid.Row="0" Style="{StaticResource ProductNameButton}" Template="{StaticResource BaseTemplate}">
+                                        <TextBlock 
+                                            TextWrapping="Wrap" 
+                                            Text="{TemplateBinding Tag}"
+                                            FontSize="18"
+                                            FontWeight="Medium"
+                                            FontFamily="Gadugi"
+                                            Padding="10"/>
+                                    </Button>
+                                    <Label Grid.Row="1" 
+                                           HorizontalContentAlignment="Left"
+                                           VerticalContentAlignment="Center"
+                                           FontSize="26"
+                                           FontWeight="Bold"
+                                           FontFamily="Gadugi"/>
+
+                                    <Button Grid.Row="2" 
+                                            Style="{StaticResource RoundedButton}" 
+                                            Template="{StaticResource BaseTemplate}"
+                                            Content="Купить"
+                                            Margin="15 15 100 15">
+                                    </Button>
+                                </Grid>
+
+                                <Grid Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Image Grid.Row="1" Source="Resources/Samsung.jpg"/>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Button" x:Key="CallRequestButton">
+            <Setter Property="Foreground" Value="#3e1fed"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Margin" Value="8"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Label" x:Key="BlockName">
+            <Setter Property="FontSize" Value="44"/>
+            <Setter Property="FontFamily" Value="Gadigi"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Margin" Value="8 20"/>
+        </Style>
+        
     </Window.Resources>
-    
+      
     <!-- Main Grid -->
     <Grid>
         <ScrollViewer>
@@ -69,12 +215,12 @@
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="500"/>
                 <RowDefinition Height="320"/>
-                <RowDefinition/>
+                <RowDefinition Height="100"/>
                 <RowDefinition Height="550"/>
-                <RowDefinition/>
+                <RowDefinition Height="100"/>
                 <RowDefinition Height="550"/>
                 <RowDefinition Height="320"/>
-                <RowDefinition/>
+                <RowDefinition Height="100"/>
                 <RowDefinition Height="550"/>
                 <RowDefinition Height="500"/>
                 </Grid.RowDefinitions>
@@ -100,20 +246,33 @@
                             <ColumnDefinition Width="170"/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Grid.Column="0" Source="Resources/Logo.png" Margin="8, 0, 0, 0"/>
-                        <ComboBox Grid.Column="1" Background="White"/>
-                        <Button 
-                            Grid.Column="2" 
-                            Content="Заказать звонок" 
-                            x:Name="buttonRequestACall" 
-                            Style="{StaticResource Menu}"
-                            Foreground="#4d70e3"/>
-                        <Button Grid.Column="3" Content="Кредит" x:Name="buttonCredit" Style="{StaticResource Menu}"/>
-                        <Button Grid.Column="4" Content="Сервисный центр" x:Name="buttonServiseCentr" Style="{StaticResource Menu}"/>
-                        <Button Grid.Column="5" Content="Акции" x:Name="buttonActions" Style="{StaticResource Menu}"/>
-                        <Button Grid.Column="6" Content="Блог" x:Name="buttonBlog" Style="{StaticResource Menu}"/>
-                        <Button Grid.Column="7" Content="Контакты" x:Name="buttonContacts" Style="{StaticResource Menu}"/>
-                        <Button Grid.Column="8" Content="Расширеная гарантия" x:Name="buttonGaranaty" Style="{StaticResource Menu}"/>
+                        <Image Grid.Column="0" Source="Resources/Logo.png" Margin="8, 0, 0, 0" />
+                        <ComboBox Grid.Column="1" Background="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                            <ComboBoxItem IsSelected="True">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock>0 800 210 186</TextBlock>
+                                </StackPanel>
+                            </ComboBoxItem>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock>0 44 333 63 52</TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock>(066) 731 32 71</TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock>(067) 153 05 08</TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock>(063) 233 49 50</TextBlock>
+                            </StackPanel>
+                        </ComboBox>
+                        <Button Grid.Column="2" Style="{StaticResource CallRequestButton}" Template="{StaticResource BaseTemplate}" Content="Заказать звонок" x:Name="buttonRequestACall"/>
+                        <Button Grid.Column="3" Style="{StaticResource Menu}" Template="{StaticResource BaseTemplate}" Content="Кредит" x:Name="buttonCredit" />
+                        <Button Grid.Column="4" Style="{StaticResource Menu}" Template="{StaticResource BaseTemplate}" Content="Сервисный центр" x:Name="buttonServiseCentr"/>
+                        <Button Grid.Column="5" Style="{StaticResource Menu}" Template="{StaticResource BaseTemplate}" Content="Акции" x:Name="buttonActions"/>
+                        <Button Grid.Column="6" Style="{StaticResource Menu}" Template="{StaticResource BaseTemplate}" Content="Блог" x:Name="buttonBlog"/>
+                        <Button Grid.Column="7" Style="{StaticResource Menu}" Template="{StaticResource BaseTemplate}" Content="Контакты" x:Name="buttonContacts"/>
+                        <Button Grid.Column="8" Style="{StaticResource Menu}" Template="{StaticResource BaseTemplate}" Content="Расширеная гарантия" x:Name="buttonGaranaty"/>
                     </Grid>
                     <!-- User Grid -->
                     <Grid Grid.Column="2">
@@ -124,16 +283,16 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <Button Grid.Column="0" x:Name="buttonSearch" Style="{StaticResource Menu}">
+                        <Button Grid.Column="0" Style="{StaticResource Menu}" Template="{StaticResource BaseTemplate}" x:Name="buttonSearch" BorderBrush="{x:Null}" Foreground="{x:Null}">
                             <Image Source="Resources/Search.png"/>
                         </Button>
-                        <Button Grid.Column="1" x:Name="buttonSignIn" Style="{StaticResource Menu}">
+                        <Button Grid.Column="1" Style="{StaticResource Menu}" Template="{StaticResource BaseTemplate}" x:Name="buttonSignIn" BorderBrush="{x:Null}" Foreground="{x:Null}">
                             <Image Source="Resources/Sign.png"/>
                         </Button>
-                        <Button Grid.Column="2" x:Name="buttonComparison" Style="{StaticResource Menu}">
+                        <Button Grid.Column="2" Style="{StaticResource Menu}" Template="{StaticResource BaseTemplate}" x:Name="buttonComparison" BorderBrush="{x:Null}" Foreground="{x:Null}">
                             <Image Source="Resources/Comparison.png"/>
                         </Button>
-                        <Button Grid.Column="3" x:Name="buttonBasket" Style="{StaticResource Menu}">
+                        <Button Grid.Column="3" Style="{StaticResource Menu}" Template="{StaticResource BaseTemplate}" x:Name="buttonBasket" BorderBrush="{x:Null}" Foreground="{x:Null}">
                             <Image Source="Resources/Basket.png"/>
                         </Button>
                     </Grid>
@@ -151,6 +310,22 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" 
+                            Style="{StaticResource ProductMenu}" 
+                            Template="{StaticResource LeftBorder}"
+                            Margin="8, 10, 0, 10"
+                            Content="Apple"/>
+                    <Button Grid.Column="1" Style="{StaticResource ProductMenu}" Content="Сматфоны"/>
+                    <Button Grid.Column="2" Style="{StaticResource ProductMenu}" Content="Ноутбуки и ПК"/>
+                    <Button Grid.Column="3" Style="{StaticResource ProductMenu}" Content="Фото Аудио PS5"/>
+                    <Button Grid.Column="4" Style="{StaticResource ProductMenu}" Content="Телевизоры"/>
+                    <Button Grid.Column="5" Style="{StaticResource ProductMenu}" Content="Гаджеты"/>
+                    <Button Grid.Column="6" 
+                            Style="{StaticResource ProductMenu}" 
+                            Template="{StaticResource RightBorder}"
+                            Margin="0, 10, 8, 10"
+                            Content="Бытовая техника"/>
                 </Grid>
 
                 <!-- Apple buttons Grid -->
@@ -167,7 +342,7 @@
                     <Button Grid.Column="2" Style="{StaticResource Category}" x:Name="buttonUsed" Tag="Used IPhone"/>
                     <Button Grid.Column="3" Style="{StaticResource Category}" x:Name="buttonWatch" Tag="Apple Watch"/>
                 </Grid>
-
+                <Label Grid.Row="4" Style="{StaticResource BlockName}" Content="Новинки"/>
                 <!-- Newest buttons Grid -->
                 <Grid Grid.Row="5">
                     <Grid.ColumnDefinitions>
@@ -179,8 +354,15 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                </Grid>
 
+                    <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
+                    <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource Product}" Tag="Смартфон Xiaomi Mi 11 Pro 8/256GB (Purple) CN w/Global ROM"/>
+                    <Button Grid.Column="2" Grid.Row="0" Style="{StaticResource Product}" Tag="Apple iPhone 8 Plus 256GB (Space Gray) Б/У"/>
+                    <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
+                    <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
+                    <Button Grid.Column="2" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
+                </Grid>
+                <Label Grid.Row="6" Style="{StaticResource BlockName}" Content="Акции"/>
                 <!-- Sare buttons Grid -->
                 <Grid Grid.Row="7">
                     <Grid.ColumnDefinitions>
@@ -192,8 +374,15 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
+                    
+                <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
+                <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource Product}" Tag="Смартфон Xiaomi Mi 11 Pro 8/256GB (Purple) CN w/Global ROM"/>
+                <Button Grid.Column="2" Grid.Row="0" Style="{StaticResource Product}" Tag="Apple iPhone 8 Plus 256GB (Space Gray) Б/У"/>
+                <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
+                <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
+                <Button Grid.Column="2" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
                 </Grid>
-
+                
                 <!-- Electronic buttons Grid -->
                 <Grid Grid.Row="8">
                     <Grid.ColumnDefinitions>
@@ -208,7 +397,7 @@
                     <Button Grid.Column="2" Style="{StaticResource Category}" x:Name="buttonSamsung" Tag="Samsung"/>
                     <Button Grid.Column="3" Style="{StaticResource Category}" x:Name="buttonAudio" Tag="Acustic"/>
                 </Grid>
-
+                <Label Grid.Row="9" Style="{StaticResource BlockName}" Content="Популяное"/>
                 <!-- Popular buttons Grid -->
                 <Grid Grid.Row="10">
                     <Grid.ColumnDefinitions>
@@ -220,10 +409,17 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
+                    
+                <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
+                <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource Product}" Tag="Смартфон Xiaomi Mi 11 Pro 8/256GB (Purple) CN w/Global ROM"/>
+                <Button Grid.Column="2" Grid.Row="0" Style="{StaticResource Product}" Tag="Apple iPhone 8 Plus 256GB (Space Gray) Б/У"/>
+                <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
+                <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
+                <Button Grid.Column="2" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
                 </Grid>
-
+                
                 <!-- Info Grid -->
-                <Grid Grid.Row="11">
+                <Grid Grid.Row="11" Background="Black">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
