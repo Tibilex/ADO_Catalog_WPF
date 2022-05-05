@@ -74,6 +74,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DB\ConectionBlockButton.cs" />
+    <Compile Include="DB\ConectionListView.cs" />
+    <Compile Include="Models\ButtonBlock.cs" />
+    <Compile Include="Models\CatalogListView.cs" />
+    <Compile Include="Models\CategoryListView.cs" />
+    <Compile Include="Models\ProductBlockButton.cs" />
     <Compile Include="ViewModels\PhoneViewModel.cs" />
     <Compile Include="View\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>

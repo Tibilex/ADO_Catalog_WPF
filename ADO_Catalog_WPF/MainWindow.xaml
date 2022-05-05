@@ -70,7 +70,7 @@
             </Style.Triggers>
         </Style>
 
-        <ControlTemplate TargetType="Button" x:Key="Tile">
+        <ControlTemplate TargetType="Button" x:Key="Block">
             <Border CornerRadius="8"  BorderBrush="#acacb0" BorderThickness="1">
                 <Grid Margin="2">
                     <Grid.ColumnDefinitions>
@@ -88,13 +88,13 @@
                             <RowDefinition Height="60"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <ItemsControl ItemsSource="{Binding Phones}">
+                        <ItemsControl ItemsSource="{Binding Block}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Button Grid.Row="0" Style="{StaticResource ProductNameButton}" Template="{StaticResource BaseTemplate}">
                                         <TextBlock 
                                             TextWrapping="Wrap" 
-                                            Text="{Binding Name}"
+                                            Text="{Binding ProductName}"
                                             FontSize="18"
                                             FontWeight="Medium"
                                             FontFamily="Gadugi"
@@ -103,7 +103,7 @@
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
-                        <ItemsControl ItemsSource="{Binding Phones}" Grid.Row="1">
+                        <ItemsControl ItemsSource="{Binding Block}" Grid.Row="1">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Label Grid.Row="1" 
@@ -161,6 +161,7 @@
             <Setter Property="Margin" Value="0, 10"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Foreground" Value="#2c2c2e"/>
+            <!--<Setter Property="Padding" Value="100"/>-->
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -325,8 +326,10 @@
         </Style>
         
         <Style TargetType="ListView" x:Key="ListCategory">
-            <!--<Setter Property="Margin" Value="0 20"/>-->
-            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="0 20"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontFamily" Value="Gadugi"/>
+            <Setter Property="Foreground" Value="#2c2c2e"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
@@ -439,26 +442,17 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Button Grid.Column="0" 
-                            Style="{StaticResource ProductMenu}" 
-                            Template="{StaticResource LeftBorder}"
-                            Margin="8, 10, 0, 10"
-                            Content="Apple"
-                            MouseEnter="Apple_MouseEnter" MouseLeave="Apple_MouseLeave"/>
-                    <Button Grid.Column="1" Style="{StaticResource ProductMenu}" Content="Сматфоны"/>
-                    <Button Grid.Column="2" Style="{StaticResource ProductMenu}" Content="Ноутбуки и ПК"/>
-                    <Button Grid.Column="3" Style="{StaticResource ProductMenu}" Content="Фото Аудио PS5"/>
-                    <Button Grid.Column="4" Style="{StaticResource ProductMenu}" Content="Телевизоры"/>
-                    <Button Grid.Column="5" Style="{StaticResource ProductMenu}" Content="Гаджеты"/>
-                    <Button Grid.Column="6" 
-                            Style="{StaticResource ProductMenu}" 
-                            Template="{StaticResource RightBorder}"
-                            Margin="0, 10, 8, 10"
-                            Content="Бытовая техника"/>
+                    <Button Grid.Column="0" Style="{StaticResource ProductMenu}" Template="{StaticResource LeftBorder}" Margin="8, 10, 0, 10" Content="Apple" MouseEnter="Apple_MouseEnter" MouseLeave="Apple_MouseLeave"/>
+                    <Button Grid.Column="1" Style="{StaticResource ProductMenu}" Content="Сматфоны" MouseEnter="Smartphone_MouseEnter" MouseLeave="Smartphone_MouseLeave"/>
+                    <Button Grid.Column="2" Style="{StaticResource ProductMenu}" Content="Ноутбуки и ПК" MouseEnter="Computers_MouseEnter" MouseLeave="Computers_MouseLeave"/>
+                    <Button Grid.Column="3" Style="{StaticResource ProductMenu}" Content="Фото Аудио PS5" MouseEnter="PhotoAudioPS5_MouseEnter" MouseLeave="PhotoAudioPS5_MouseLeave"/>
+                    <Button Grid.Column="4" Style="{StaticResource ProductMenu}" Content="Телевизоры" MouseEnter="Tv_MouseEnter" MouseLeave="Tv_MouseLeave"/>
+                    <Button Grid.Column="5" Style="{StaticResource ProductMenu}" Content="Гаджеты" MouseEnter="Gadgets_MouseEnter" MouseLeave="Gadgets_MouseLeave"/>
+                    <Button Grid.Column="6" Style="{StaticResource ProductMenu}" Template="{StaticResource RightBorder}" Margin="0, 10, 8, 10" Content="Бытовая техника" MouseEnter="Appliances_MouseEnter" MouseLeave="Apple_MouseLeave"/>
                 </Grid>
 
-                <Grid Grid.Row="2" x:Name="GridSubWindow">
-                    <Grid x:Name="Apple" Background="Gray" Visibility="Hidden" Margin="0">
+                <Grid Grid.Row="2" x:Name="GridSubWindow" Margin="20 0">
+                    <Grid x:Name="Apple" Background="White" Visibility="Hidden" Margin="20 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
@@ -472,11 +466,11 @@
                         <ListView Grid.Column="1" Style="{StaticResource ListCategory}" x:Name="listiPad"/>
                         <ListView Grid.Column="2" Style="{StaticResource ListCategory}" x:Name="listmacbook"/>
                         <ListView Grid.Column="3" Style="{StaticResource ListCategory}" x:Name="listiMac"/>
-                        <ListView Grid.Column="4" Style="{StaticResource ListCategory}" x:Name="listapple_watch"/>
-                        <ListView Grid.Column="5" Style="{StaticResource ListCategory}" x:Name="listaccessories_apple"/>
+                        <ListView Grid.Column="4" Style="{StaticResource ListCategory}" x:Name="listapplewatch"/>
+                        <ListView Grid.Column="5" Style="{StaticResource ListCategory}" x:Name="listaccessoriesapple"/>
                         <ListView Grid.Column="6" Style="{StaticResource ListCategory}" x:Name="llistcases"/>
                     </Grid>
-                    <Grid x:Name="Smartphone" Background="Gray" Visibility="Hidden" Margin="0">
+                    <Grid x:Name="Smartphone" Background="White" Visibility="Hidden" Margin="20 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
@@ -494,7 +488,7 @@
                         <ListView Grid.Column="5" Style="{StaticResource ListCategory}" x:Name="smartClock"/>
                         <ListView Grid.Column="6" Style="{StaticResource ListCategory}" x:Name="casesSamsung"/>
                     </Grid>
-                    <Grid x:Name="Computers" Visibility="Hidden" Background="White" Margin="0">
+                    <Grid x:Name="Computers" Visibility="Hidden" Background="White" Margin="20 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
@@ -510,7 +504,7 @@
                         <ListView Grid.Column="4" Style="{StaticResource ListCategory}" x:Name="tablets"/>
                         <ListView Grid.Column="5" Style="{StaticResource ListCategory}" x:Name="accessories"/>
                     </Grid>
-                    <Grid x:Name="PhotoAudioPS5" Visibility="Hidden"  Background="White" Margin="100 0">
+                    <Grid x:Name="PhotoAudioPS5" Visibility="Hidden" Background="White" Margin="20 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
@@ -520,11 +514,11 @@
                         </Grid.ColumnDefinitions>
                         <ListView Grid.Column="0" Style="{StaticResource ListCategory}" x:Name="cameras"/>
                         <ListView Grid.Column="1" Style="{StaticResource ListCategory}" x:Name="sonyPlaystation"/>
-                        <ListView Grid.Column="2" Style="{StaticResource ListCategory}" x:Name="actionCameras"/>
+                        <ListView Grid.Column="2" Style="{StaticResource ListCategory}" x:Name="actionCam"/>
                         <ListView Grid.Column="3" Style="{StaticResource ListCategory}" x:Name="portableAcoustic"/>
                         <ListView Grid.Column="4" Style="{StaticResource ListCategory}" x:Name="headphones"/>
                     </Grid>
-                    <Grid x:Name="Tv" Visibility="Hidden" Background="White" Margin="100">
+                    <Grid x:Name="Tv" Visibility="Hidden" Background="White" Margin="20 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
@@ -540,7 +534,7 @@
                         <ListView Grid.Column="4" Style="{StaticResource ListCategory}" x:Name="tvProjectors"/>
                         <ListView Grid.Column="5" Style="{StaticResource ListCategory}" x:Name="tvSoundbars"/>
                     </Grid>
-                    <Grid x:Name="Gadgets" Visibility="Hidden" Background="White" Margin="100 0">
+                    <Grid x:Name="Gadgets" Visibility="Hidden" Background="White" Margin="20 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
@@ -552,23 +546,23 @@
                         <ListView Grid.Column="1" Style="{StaticResource ListCategory}" x:Name="electricTransport"/>
                         <ListView Grid.Column="2" Style="{StaticResource ListCategory}" x:Name="smartHouse"/>
                         <ListView Grid.Column="3" Style="{StaticResource ListCategory}" x:Name="cables"/>
-                        <ListView Grid.Column="4" Style="{StaticResource ListCategory}" x:Name="chsrgers"/>
+                        <ListView Grid.Column="4" Style="{StaticResource ListCategory}" x:Name="chargers"/>
                     </Grid>
-                    <Grid x:Name="Appliances" Visibility="Hidden" Background="White" Margin="100 0">
+                    <Grid x:Name="Appliances" Visibility="Hidden" Background="White" Margin="20 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <ListView Grid.Column="0" Style="{StaticResource ListCategory}" x:Name="vacuumCleaners"/>
+                        <ListView Grid.Column="0" Style="{StaticResource ListCategory}" x:Name="vacumCleaners"/>
                         <ListView Grid.Column="1" Style="{StaticResource ListCategory}" x:Name="airConditioners"/>
                         <ListView Grid.Column="2" Style="{StaticResource ListCategory}" x:Name="largeHomeAppliances"/>
                         <ListView Grid.Column="3" Style="{StaticResource ListCategory}" x:Name="smallHouseholdApliances"/>
                     </Grid>
                 </Grid>
                 <Frame Grid.Row="2" x:Name="MainFrame" />
-                <Image Grid.Row="2" Source="Resources/Ukraine.png" Visibility="Hidden" x:Name="banerImage"/>
+                <Image Grid.Row="2" Source="Resources/Ukraine.png" Visibility="Visible" x:Name="banerImage"/>
                 <!-- Apple buttons Grid -->
                 <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>
@@ -605,7 +599,7 @@
                 </Grid>
                 <Label Grid.Row="4" Style="{StaticResource BlockName}" Content="Новинки"/>
                 <!-- Newest buttons Grid -->
-                <Grid Grid.Row="5">
+                <Grid Grid.Row="5" x:Name="New">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -616,16 +610,16 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource Product2}" Template="{StaticResource Tile}"/>
-                    <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource Product}" Tag="Смартфон Xiaomi Mi 11 Pro 8/256GB (Purple) CN w/Global ROM"/>
-                    <Button Grid.Column="2" Grid.Row="0" Style="{StaticResource Product}" Tag="Apple iPhone 8 Plus 256GB (Space Gray) Б/У"/>
-                    <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
-                    <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
-                    <Button Grid.Column="2" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
+                    <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource Product2}" Template="{StaticResource Block}" x:Name="New1"/>
+                    <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource Product2}" Template="{StaticResource Block}" x:Name="New2"/>
+                    <Button Grid.Column="2" Grid.Row="0" Style="{StaticResource Product2}" Template="{StaticResource Block}" x:Name="New3"/>
+                    <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource Product2}" Template="{StaticResource Block}" x:Name="New4"/>
+                    <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource Product2}" Template="{StaticResource Block}" x:Name="New5"/>
+                    <Button Grid.Column="2" Grid.Row="1" Style="{StaticResource Product2}" Template="{StaticResource Block}" x:Name="New6"/>
                 </Grid>
                 <Label Grid.Row="6" Style="{StaticResource BlockName}" Content="Акции"/>
                 <!-- Sare buttons Grid -->
-                <Grid Grid.Row="7">
+                <Grid Grid.Row="7" x:Name="Actions">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -636,12 +630,12 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
-                    <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource Product}" Tag="Смартфон Xiaomi Mi 11 Pro 8/256GB (Purple) CN w/Global ROM"/>
-                    <Button Grid.Column="2" Grid.Row="0" Style="{StaticResource Product}" Tag="Apple iPhone 8 Plus 256GB (Space Gray) Б/У"/>
-                    <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
-                    <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
-                    <Button Grid.Column="2" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
+                    <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource Product}" x:Name="Actions1"/>
+                    <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource Product}" x:Name="Actions2"/>
+                    <Button Grid.Column="2" Grid.Row="0" Style="{StaticResource Product}" x:Name="Actions3"/>
+                    <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource Product}" x:Name="Actions4"/>
+                    <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource Product}" x:Name="Actions5"/>
+                    <Button Grid.Column="2" Grid.Row="1" Style="{StaticResource Product}" x:Name="Actions6"/>
                 </Grid>
 
                 <!-- Electronic buttons Grid -->
@@ -680,7 +674,7 @@
                 </Grid>
                 <Label Grid.Row="9" Style="{StaticResource BlockName}" Content="Популяное"/>
                 <!-- Popular buttons Grid -->
-                <Grid Grid.Row="10">
+                <Grid Grid.Row="10" x:Name="Popular">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -691,12 +685,12 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
-                    <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource Product}" Tag="Смартфон Xiaomi Mi 11 Pro 8/256GB (Purple) CN w/Global ROM"/>
-                    <Button Grid.Column="2" Grid.Row="0" Style="{StaticResource Product}" Tag="Apple iPhone 8 Plus 256GB (Space Gray) Б/У"/>
-                    <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
-                    <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
-                    <Button Grid.Column="2" Grid.Row="1" Style="{StaticResource Product}" Tag="OnePlus 9RT 8/256GB (Silver)"/>
+                    <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource Product}" x:Name="Popular1"/>
+                    <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource Product}" x:Name="Popular2"/>
+                    <Button Grid.Column="2" Grid.Row="0" Style="{StaticResource Product}" x:Name="Popular3"/>
+                    <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource Product}" x:Name="Popular4"/>
+                    <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource Product}" x:Name="Popular5"/>
+                    <Button Grid.Column="2" Grid.Row="1" Style="{StaticResource Product}" x:Name="Popular6"/>
                 </Grid>
 
                 <!-- Info Grid -->
